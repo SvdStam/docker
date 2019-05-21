@@ -1,0 +1,19 @@
+version: "3"
+services:
+    app: 
+        container_name: project_iets
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        working_dir: /app
+        volumes:
+            - ./data:/app/data
+            - ./logs:/app/.snakemake/logs
+        ports:
+            - 8080:8000
+    db:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: example
